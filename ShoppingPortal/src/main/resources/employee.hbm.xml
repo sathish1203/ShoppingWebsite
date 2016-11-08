@@ -4,7 +4,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
 <hibernate-mapping>  
-<class name="models.Employee" table="USER"  >  
+<class name="models.User" table="USER"  >  
           <id name="uname" type = "string">
           <column name = "UNAME" length = "15"/>  
           <generator class="assigned"/>  

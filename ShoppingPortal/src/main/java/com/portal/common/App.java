@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 import DAOs.UserDAO;
-import models.Employee;
+import models.User;
 
 public class App {
 	public static void main(String[] args) {
@@ -17,10 +17,10 @@ public class App {
 		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
 		obj.printHello();
 	    UserDAO userAccess = (UserDAO)context.getBean("userDAO");
-		List<Employee> users = new ArrayList<Employee>();
+		List<User> users = new ArrayList<User>();
 		users= userAccess.getUserByUname("ram1203");
 		System.out.println("User is"+users);
-		for (Employee user:users)
+		for (User user:users)
 		{
 			System.out.println("User is "+ user.getUname());
 			System.out.println("Last name is "+ user.getLastname());
