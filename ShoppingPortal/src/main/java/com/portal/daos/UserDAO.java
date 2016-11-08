@@ -1,43 +1,46 @@
 package com.portal.daos;  
 import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.Criteria;
+import org.hibernate.query.Query;
 
 import com.portal.models.User;
 
-public class UserDAO{
+public class UserDAO extends HibernateSession{
+	SessionFactory mySessionFactory;
 	
-private SessionFactory sessionFactory;
-
-public void setSessionFactory(SessionFactory sessionFactory)
-{
-this.sessionFactory = sessionFactory;	
+public UserDAO(SessionFactory mySessionFactory){
+	new Configuration().configure();
+	this.mySessionFactory = mySessionFactory;
+	
 }
-	
-public UserDAO() {
-Configuration configuration = new Configuration().configure();
-	
-}	
 	
 public List getUserByUname(String uname)
 {
-	List<User> users = null;
+	Session session = mySessionFactory.openSession();
+    session.beginTransaction();
 	
-	try{
-		
-		Session session = sessionFactory.openSession();
-		org.hibernate.Transaction tx = session.beginTransaction();
-		Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("uname", uname));
-		users = (List<User>)criteria.list();
-		tx.commit();
-	}catch(Exception e){e.printStackTrace();}
-	
-	
-    return users;	
-	
+    User user_sathishtest = new User();
+    user_sathishtest.setFirstname("Sathish_test");
+    user_sathishtest.setLastname("Sathish_test");
+    user_sathishtest.setUname("Sathish_test_11");
+    user_sathishtest.setPassword("Sathish_test");
+    user_sathishtest.setEnabled(true);
+    
+    session.save(user_sathishtest);
+    session.getTransaction().commit();
+    
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("uname", uname));
+	List<User> users = (List<User>)criteria.list();
+	session.getTransaction().commit();
+	session.close();
+    return users;
+    	
 }
 
 

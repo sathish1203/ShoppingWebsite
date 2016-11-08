@@ -4,16 +4,16 @@
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="helloBean" class="com.portal.common.HelloWorld">
-		<property name="name" value="Sathish" />
+	<property name="name" value="Sathish" />
 	</bean>
 
-    <bean id = "mySessionFactory"  class = "org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <bean id = "sessionFactory_bn"  class = "org.springframework.orm.hibernate4.LocalSessionFactoryBean">
     <property name = "configLocation" value = "hibernate.cfg.xml"/>
     </bean> 
 
-    <bean id = "userDAO"
-    class = "com.portal.daos.UserDAO">
-    <property name = "sessionFactory" ref = "mySessionFactory"/>
+    <bean id = "h2_db_01"
+    class = "com.portal.daos.HibernateSession" scope = "singleton">
+    <property name = "sessionFactory" ref = "sessionFactory_bn"/>
     </bean>
 
 

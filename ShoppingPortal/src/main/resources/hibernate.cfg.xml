@@ -13,5 +13,6 @@ EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <property name = "hibernate.show_sql">true</property>
 <property name = "hibernate.current_session_context_class">thread</property>
 <mapping resource = "models/employee.hbm.xml"/>
+
 </session-factory>
 </hibernate-configuration>

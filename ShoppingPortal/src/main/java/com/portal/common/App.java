@@ -7,17 +7,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.portal.daos.HibernateSession;
 import com.portal.daos.UserDAO;
 import com.portal.models.User;
 
 
 
 public class App {
+	
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring_Module.xml");
 		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
+		HibernateSession db_session = (HibernateSession) context.getBean("h2_db_01");
 		obj.printHello();
-	    UserDAO userAccess = (UserDAO)context.getBean("userDAO");
+	    UserDAO userAccess = new UserDAO(db_session.getSessionFactory());
 		List<User> users = new ArrayList<User>();
 		users= userAccess.getUserByUname("ram1203");
 		System.out.println("User is"+users);
