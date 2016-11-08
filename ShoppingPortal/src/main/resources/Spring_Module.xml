@@ -13,7 +13,7 @@
     </bean> 
 
     <bean id = "userDAO"
-    class = "DAOs.UserDAO">
+    class = "com.portal.daos.UserDAO">
     <property name = "sessionFactory" ref = "mySessionFactory"/>
     </bean>
 

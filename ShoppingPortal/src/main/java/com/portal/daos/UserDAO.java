@@ -1,4 +1,4 @@
-package DAOs;  
+package com.portal.daos;  
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,7 +6,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.Criteria;
 
-import models.User;  
+import com.portal.models.User;
+
 public class UserDAO{
 	
 private SessionFactory sessionFactory;

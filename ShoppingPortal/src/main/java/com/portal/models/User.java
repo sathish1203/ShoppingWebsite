@@ -1,4 +1,4 @@
-package models;
+package com.portal.models;
 
 public class User {
 
