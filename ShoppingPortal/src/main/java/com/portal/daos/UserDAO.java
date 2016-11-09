@@ -18,33 +18,89 @@ public UserDAO(SessionFactory mySessionFactory){
 	this.mySessionFactory = mySessionFactory;
 	
 }
-	
-public List getUserByUname(String uname)
-{
+
+public List<User> getUsers(){
+	List<User> users=null;
+	try{
 	Session session = mySessionFactory.openSession();
     session.beginTransaction();
-	
-    User user_sathishtest = new User();
-    user_sathishtest.setFirstname("Sathish_test");
-    user_sathishtest.setLastname("Sathish_test");
-    user_sathishtest.setUname("Sathish_test_11");
-    user_sathishtest.setPassword("Sathish_test");
-    user_sathishtest.setEnabled(true);
-    
-    session.save(user_sathishtest);
+    Criteria criteria = session.createCriteria(User.class);
+    users= (List<User>)criteria.list();
     session.getTransaction().commit();
-    
+    session.close();
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+	return users;
+}
+
+public User getUserByUsername(String uname){
+	User user=null;
+	try{
+	Session session = mySessionFactory.openSession();
     session.beginTransaction();
     Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("uname", uname));
-	List<User> users = (List<User>)criteria.list();
-	session.getTransaction().commit();
-	session.close();
-    return users;
-    	
+	user = (User)criteria.uniqueResult();
+    session.getTransaction().commit();
+    session.close();
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+	return user;
 }
 
 
+public boolean addUser(User u){
+	boolean commit = false;
+	try{
+	Session session = mySessionFactory.openSession();
+    session.beginTransaction();
+    session.save(u);
+    session.getTransaction().commit();
+    session.close();
+    commit = true;
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+	return commit;
+}
 
-//method to return all employees  
+
+public boolean UpdateUser(User u){
+	boolean commit = false;
+	try{
+	Session session = mySessionFactory.openSession();
+    session.beginTransaction();
+    session.update(u);
+    session.getTransaction().commit();
+    session.close();
+    commit = true;
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+	return commit;
+}
+
+
+public boolean RemoveUser(User u){
+	boolean commit = false;
+	try{
+	Session session = mySessionFactory.openSession();
+    session.beginTransaction();
+    session.remove(u);
+    session.getTransaction().commit();
+    session.close();
+	commit = true;
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}
+	return commit;
+}
+
 
 }  

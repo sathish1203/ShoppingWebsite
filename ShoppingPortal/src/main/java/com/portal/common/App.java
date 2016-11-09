@@ -22,7 +22,7 @@ public class App {
 		obj.printHello();
 	    UserDAO userAccess = new UserDAO(db_session.getSessionFactory());
 		List<User> users = new ArrayList<User>();
-		users= userAccess.getUserByUname("ram1203");
+		users= userAccess.getUsers();
 		System.out.println("User is"+users);
 		for (User user:users)
 		{
