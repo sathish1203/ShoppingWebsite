@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.portal.daos.HibernateSession;
 import com.portal.daos.UserDAO;
+import com.portal.daos.modelDaos.userAccess;
 import com.portal.models.User;
 
 
@@ -20,9 +21,11 @@ public class App {
 		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
 		HibernateSession db_session = (HibernateSession) context.getBean("h2_db_01");
 		obj.printHello();
-	    UserDAO userAccess = new UserDAO(db_session.getSessionFactory());
+		
+	    userAccess userAcc = new userAccess(db_session.getSessionFactory());
 		List<User> users = new ArrayList<User>();
-		users= userAccess.getUsers();
+		users= userAcc.getUsers();
+		
 		System.out.println("User is"+users);
 		for (User user:users)
 		{
